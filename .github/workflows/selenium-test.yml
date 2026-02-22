@@ -1,7 +1,10 @@
 name: Selenium Google Test
 
 on:
-  workflow_dispatch:   # manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write   # allow pushing commits
 
 jobs:
   selenium-job:
@@ -10,6 +13,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,5 +35,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add screenshots/google.png
-          git commit -m "Add Selenium screenshot"
+          git commit -m "Add Selenium screenshot" || echo "No changes to commit"
           git push
