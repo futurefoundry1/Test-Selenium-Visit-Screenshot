@@ -26,5 +26,8 @@ try:
     # Take screenshot
     driver.save_screenshot("screenshots/google.png")
 
+    # Print the HTML of the current page
+    print(driver.page_source)
+
 finally:
     driver.quit()
